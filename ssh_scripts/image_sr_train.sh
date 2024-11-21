@@ -8,10 +8,10 @@ DIFFUSION_FLAGS="--sr_diffusion_steps 1000 --noise_schedule linear" # --use_kl T
 
 TRAIN_FLAGS="--lr 1e-4 --batch_size 6 --devices G8 --log_interval 100 --sample_fn ddpm 
  --save_interval 10000 --num_workers 8 --frame_gap 1 
- --use_db False --resume_checkpoint /data10/rld/outputs/MM-Diffusion/models/guided-diffusion_64_256_upsampler.pt" #--schedule_sampler loss-second-moment --resume_checkpoint models/256x256_diffusion_uncond.pt
+ --use_db False --resume_checkpoint ./models/guided-diffusion_64_256_upsampler.pt" #--schedule_sampler loss-second-moment --resume_checkpoint models/256x256_diffusion_uncond.pt
 
 NUM_GPUS=8
-DATA_DIR="/data6/rld/data/landscape_png/train"
-OUT_DIR="/data6/rld/outputs/MM-Diffusion/sr-image-train/"
+DATA_DIR="./data/landscape_png/train"
+OUT_DIR="./output/sr-image-train/"
 
 mpiexec -n $NUM_GPUS --allow-run-as-root python py_scripts/image_sr_train.py --data_dir $DATA_DIR --output_dir ${OUT_DIR} $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS

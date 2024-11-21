@@ -20,12 +20,12 @@ DIFFUSION_FLAGS="--diffusion_steps 1000 --noise_schedule linear
 SR_DIFFUSION_FLAGS="--sr_diffusion_steps 1000  --sr_sample_fn ddim  --sr_timestep_respacing ddim25"
 
 # Modify the following paths to your own paths
-MULTIMODAL_MODEL_PATH="/data10/rld/outputs/MM-Diffusion/models/AIST++.pt"
-SR_MODEL_PATH="/data10/rld/outputs/MM-Diffusion/models/AIST++_SR.pt"
-OUT_DIR="/data10/rld/outputs/MM-Diffusion/samples/multimodal-sample-sr/dpm_solver"
-REF_PATH="/data10/rld/dataset/AIST++_crop/train"
+MULTIMODAL_MODEL_PATH="./models/AIST++.pt"
+SR_MODEL_PATH="./models/AIST++_SR.pt"
+OUT_DIR="./output/multimodal-sample-sr/dpm_solver"
+REF_PATH="./data/AIST++_crop/train"
 
-NUM_GPUS=4
+NUM_GPUS=1
 mpiexec -n $NUM_GPUS python3 py_scripts/multimodal_sample_sr.py  \
 $MODEL_FLAGS $SRMODEL_FLAGS $DIFFUSION_FLAGS $SR_DIFFUSION_FLAGS --ref_path ${REF_PATH} \
 --output_dir ${OUT_DIR} --multimodal_model_path ${MULTIMODAL_MODEL_PATH}  --sr_model_path ${SR_MODEL_PATH} 
